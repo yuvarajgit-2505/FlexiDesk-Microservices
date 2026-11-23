@@ -1,0 +1,27 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Node modules
+node_modules/
+
+# Java build files
+target/
+build/
+
+# Java crash logs
+hs_err_pid*.log
+replay_pid*.log
+
+# Log files
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
