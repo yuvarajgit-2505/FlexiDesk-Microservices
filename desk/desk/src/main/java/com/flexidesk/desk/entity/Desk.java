@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.Version;
 
 @Entity
 @Data
@@ -27,5 +28,7 @@ public class Desk {
     private Double pricePerDay;
     private Integer totalSlots;
     private Integer available;
+      @Version
+    private Integer version;
 
 }

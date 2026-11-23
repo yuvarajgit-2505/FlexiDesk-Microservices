@@ -4,6 +4,7 @@ import com.flexidesk.desk.entity.Desk;
 import com.flexidesk.desk.repository.DeskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
 @RestController
 @RequestMapping("/internal/desks")
@@ -20,20 +21,21 @@ public class InternalDeskController {
 
     }
 
-    @PutMapping("/{id}/reserve")
-    public void reserveDesk(@PathVariable Long id) {
+   @PutMapping("/{id}/reserve")
+@Transactional
+public void reserveDesk(@PathVariable Long id) {
 
-        Desk desk = deskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Desk not found"));
+    Desk desk = deskRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Desk not found"));
 
-        if (desk.getAvailable() <= 0) {
-            throw new RuntimeException("Desk not available");
-        }
-
-        desk.setAvailable(desk.getAvailable() - 1);
-
-        deskRepository.save(desk);
+    if (desk.getAvailable() <= 0) {
+        throw new RuntimeException("Desk not available");
     }
+
+    desk.setAvailable(desk.getAvailable() - 1);
+
+    deskRepository.save(desk);
+}
 
     @PutMapping("/{id}/release")
     public void releaseDesk(@PathVariable Long id) {
